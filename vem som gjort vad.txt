@@ -1,4 +1,4 @@
 Vem har gjort vad:
 Robar Zangana - NFC, KLOCKA och HEMSIDAN
 Martin Andersson - APPEN för mobilen
-Victor Bergenblock - LED, HÖGTALARE och delaktig i appens design
+Victor Bergenblock - LED, HÖGTALARE, Basstationen och delaktig i appens design
