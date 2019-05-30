@@ -1,1 +1,1 @@
-"# grupp_15" 
+IPP kurs Grupp 15
