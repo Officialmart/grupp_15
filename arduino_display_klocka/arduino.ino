@@ -1,47 +1,26 @@
-
-/**************************************************************************
- This is an example for our Monochrome OLEDs based on SSD1306 drivers
-
- Pick one up today in the adafruit shop!
- ------> http://www.adafruit.com/category/63_98
-
- This example is for a 128x64 pixel display using SPI to communicate
- 4 or 5 pins are required to interface.
-
- Adafruit invests time and resources providing this open
- source code, please support Adafruit and open-source
- hardware by purchasing products from Adafruit!
-
- Written by Limor Fried/Ladyada for Adafruit Industries,
- with contributions from the open source community.
- BSD license, check license.txt for more information
- All text above, and the splash screen below must be
- included in any redistribution.
- **************************************************************************/
-//includes libraries
+//Inkluderade bibliotek
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include <DS3231.h> //KLOCKA
+#include <DS3231.h> //inkludera KLOCKA
 
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 64 // OLED display height, in pixels
-
-// Declaration for SSD1306 display connected using software SPI (default case):
-#define OLED_MOSI   9//this pin is used for Master Out, Slave in(MOSI)
-#define OLED_CLK   10//this pin is used for Clock(CLK)
-#define OLED_DC     6//this pin is used for Data/command(DC)
-#define OLED_CS     7//this pin is used for Chip select(CS)
-#define OLED_RESET  8//this pin is used for Reset(RESET)
+#define SCREEN_WIDTH 128 // Displayens bredd i pixlar
+#define SCREEN_HEIGHT 64 // Displayens höjd i pixlar
+//pins
+#define OLED_MOSI   9//det här utaget är till Master Out, Slave in(MOSI)
+#define OLED_CLK   10//det här utaget är till  Clock(CLK)
+#define OLED_DC     6//det här utaget är till  Data/command(DC)
+#define OLED_CS     7//det här utaget är till  Chip select(CS)
+#define OLED_RESET  8//det här utaget är till Reset(RESET)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,
   &SPI, OLED_DC, OLED_RESET, OLED_CS);
 
 
-#define NUMFLAKES     10 // Number of snowflakes in the animation example
-//logos height and width
-#define LOGO_HEIGHT   16 
-#define LOGO_WIDTH    16
+#define NUMFLAKES     10 // antal snöflingor i animationen
+//animations logga
+#define LOGO_HEIGHT   16 // loggans höjd i pixlar
+#define LOGO_WIDTH    16 // loggans bredd i pixlar
 static const unsigned char PROGMEM logo_bmp[] =
 { B00000000, B11000000,
   B00000001, B11000000,
@@ -63,26 +42,26 @@ static const unsigned char PROGMEM logo_bmp[] =
 
 const byte rxPin = 2; //
 const byte txPin = 3; //
-const int ledPinG =  13;      // the number of the LED pin
-const int ledPinY =  12;      // the number of the LED pin
-const int ledPinR =  11;      // the number of the LED pin
+const int ledPinG =  13;      //  LED pin nummer
+const int ledPinY =  12;      //  LED pin nummer
+const int ledPinR =  11;      //  LED pin nummer
 float Volt = 0;
 DS3231  rtc(SDA, SCL);
 void setup() {
 
-//CLOCK
+//klocka
 // Setup Serial connection
   Serial.begin(115200);
-  // Uncomment the next line if you are using an Arduino Leonardo
+  
   //while (!Serial) {}
   
-  // Initialize the rtc object
+  // sätter igång rtc
   rtc.begin();
   
-  // The following lines can be uncommented to set the date and time
-  //rtc.setDOW(WEDNESDAY);     // Set Day-of-Week to SUNDAY
-  rtc.setTime(14, 00, 00);     // Set the time to 12:00:00 (24hr format)
-  //rtc.setDate(1, 5, 2019);   // Set the date to January 1st, 2014
+  
+  //rtc.setDOW(WEDNESDAY);     
+  rtc.setTime(14, 00, 00);     // sätter tiden till 14:00:00 (24hr format)
+  //rtc.setDate(1, 5, 2019);   
 
   
  //DISPLAY
@@ -94,8 +73,8 @@ pinMode(txPin, OUTPUT);
 
 Serial.begin(9600);
  
-// SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
-  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3D)) { // Address 0x3D for 128x64
+//ifall serial failar
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3D)) { 
     Serial.println(F("SSD1306 allocation failed"));
     for(;;); // Don't proceed, loop forever
   }
@@ -139,7 +118,7 @@ void loop() {
 
   
 }
-
+//resten är animations delar
 void testdrawline() {
   int16_t i;
 
@@ -221,7 +200,7 @@ void testfillrect(void) {
     display.fillRect(i, i, display.width()-i*2, display.height()-i*2, INVERSE);
     display.display(); // Update screen with each newly-drawn rectangle
     delay(1);
-  }
+    }
 
   delay(2000);
 }
